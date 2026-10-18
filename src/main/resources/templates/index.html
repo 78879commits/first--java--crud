@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Book Management</title>
+</head>
+<body>
+<h1>My First Java CRUD Application</h1>
+
+<h2>Add a Book</h2>
+<form action="/add" method="post">
+    <input name="title" placeholder="Book title" required>
+    <input name="author" placeholder="Author" required>
+    <button type="submit">Add Book</button>
+</form>
+
+<h2>Book List</h2>
+
+<div th:each="book : ${books}">
+    <form th:action="@{/update/{id}(id=${book.id})}"
+          method="post">
+        <input name="title" th:value="${book.title}" required>
+        <input name="author" th:value="${book.author}" required>
+        <button type="submit">Update</button>
+    </form>
+
+    <form th:action="@{/delete/{id}(id=${book.id})}"
+          method="post">
+        <button type="submit">Delete</button>
+    </form>
+    <hr>
+</div>
+</body>
+</html>
